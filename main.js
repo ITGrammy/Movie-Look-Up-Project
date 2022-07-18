@@ -10,7 +10,7 @@ const search = (ev) => {
   const title = document.querySelector("#title").value;
   const year = document.querySelector("#year").value;
   const plot= document.querySelector("#plot").value;
-  const url = `https://www.omdbapi.com/?t=${title}&y=${year}&plot=${plot}=full&apikey=${apiKey}`;
+  const url = `https://www.omdbapi.com/?t=${title}&y=${year}&plot=${plot}&apikey=${apiKey}`;
 
   console.log(url);
   fetch(url)
