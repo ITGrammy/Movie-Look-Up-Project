@@ -1,44 +1,29 @@
+<!--Using div classes that are called from to display data in the js-->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>Movie Search</title>
   </head>
-
   <body>
-    <div id="app"></div>
-    <form>
-      <label class="control-label" for="title">Title:</label>
-
-      <input
-        type="text"
-        placeholder="Title of the movie"
-        id="title"
-        required="required"
-      /><br />
-      <label class="control-label" for="plot">Plot:</label>
-
-      <select name="plot" id="plot" style="width: 100px">
-        <option value="" selected="">Short</option>
-        <option value="full">Full</option>
-      </select>
-      <br />
-      <label class="control-label" for="year">Year: </label>
-
-      <input
-        type="number"
-        placeholder="Year"
-        required="required"
-        minlength="4"
-        ,
-        maxlength="4"
-        id="year"
-      /><br />
-      <button id="go" type="submit">go</button>
-    </form>
-    <div id="movie-details"></div>
+    <div id="app">
+      <button id="favorites">
+        See your added favorites
+      </button>
+      <h1>Movie App</h1>
+      <div class="movie-details"></div>
+      <div class="note-container"></div>
+      <div class="favorite-container"></div>
+      <div class="form-container"></div>
+      </div>
     <script type="module" src="/main.js"></script>
+    <script type="module" src="/js/connection.js"></script>
+    
   </body>
 </html>
+
+<!-- Hello -->
+<!--Hello again-->
