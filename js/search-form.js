@@ -36,11 +36,16 @@ const formTemplate =` <form>
   id="year"
 /><br />
 <button id="go" type="submit">go</button>
-</form>`
+</form>`;
+
+//go find form template and put it here
+document.querySelector('.formContainer').innerHTML = formTemplate;
+document.querySelector('form').addEventListener('submit', this.search);
 }
 
 search () {
 //job of this method is to send the search to (OMDB)cloud
+console.log('Search!');
 }
 
 dispayResults(){

@@ -15,11 +15,12 @@ export default class Movie {
         <img src="${data.Poster}" alt= "poster image"/>
         <p>${data.Plot}</p>
         `;
+        return movie.Template;
     }
-return movie.Template;{
+
     //givedata and it will  giveu the html
     
-    like () }
+    like () {
 
         //notifies statemanager that it would like to 
         //save the movie  to the db
