@@ -1,8 +1,10 @@
+//Set up variables
 //Db variable and initialized db w/name and version
 let db;
 let dbReq = indexedDB.open('myDatabase', 2);
 
 //Initializing the two tables
+//auto increment sets up the key
 dbReq.onupgradeneeded = function(event) {
     db = event.target.result;
     db.createObjectStore('notes', {autoIncrement: true});
@@ -35,6 +37,7 @@ dbReq.onupgradeneeded = function(event) {
         let tx = db.transaction(['favorites'], 'readwrite');
         let store = tx.objectStore('favorites');
         // Put the sticky note into the object store
+        //adds to the db
         store.add(message);
         // Wait for the database transaction to complete
         tx.oncomplete = function() { console.log('stored note!') }

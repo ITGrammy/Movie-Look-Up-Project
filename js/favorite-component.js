@@ -1,11 +1,14 @@
+//Setting up variables we are going to use
 import { addFavorite } from "./connection";
 import Form from "./form-component";
 import StateManager from "./state-manager";
 const stateManager = new StateManager();
 import {apiKey} from "./key"
 
+//Created class called favorite
 export default class Favorite {
-  favoriteArray = [];;
+  //need favorite array implemented to display 
+  favoriteArray = [];
   constructor() {
     //Created a favorite template to divide code
     const formTemplate = `
@@ -45,9 +48,10 @@ export default class Favorite {
     document
       .querySelector("form")
       .addEventListener("submit", this.search.bind(this));
+      //once you hit submit searches for movie and displays it
     //adds event listener when user clicks submit add comment
   }
-//Search function
+//Search function takes in value and puts it in the url
   search = (ev) => {
     ev.preventDefault();
     const title = document.querySelector("#title").value;
@@ -55,11 +59,13 @@ export default class Favorite {
     const plot = document.querySelector("#plot").value;
     const url = `https://www.omdbapi.com/?t=${title}&y=${year}&plot=${plot}&apikey=${apiKey}`;
 
+    //Fetches the data
     console.log(url);
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        //Gets movie details class sees if a child Element and removes it b4 displaying next one
         const parent = document.querySelector(".movie-details");
         while (parent.firstChild) {
           parent.removeChild(parent.firstChild);
@@ -79,11 +85,7 @@ export default class Favorite {
         `;           
 
 
-
-
-        
-
-        //Target information  or Movie  Details by adding to the DOM
+        //Target information  or Movie  Details by adding to the DOM displays the movies
         document
           .querySelector(".movie-details")
           .insertAdjacentHTML("afterend", movieTemplate);
@@ -94,6 +96,7 @@ export default class Favorite {
         const form = new Form()
         console.log(data.Title);
         console.log(data.Poster);
+        //Once they hit submit button adds to favorites
         document.getElementById("favorite").addEventListener("click" , stateManager.submitFavorite(data))
       });
   };
