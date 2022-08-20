@@ -9,16 +9,28 @@
     <title>Movie Search</title>
   </head>
   <body>
+    <form action="/action_page.php" method="get">                               
     <div id="app">
       <button id="favorites">
-        See your added favorites
+        Post a note and add to favorites
       </button>
+
+      <button id="Notes"> 
+        Add notes
+      </button>
+
+      <button id="favorites">
+       Favorites
+      </button>
+
       <h1>Movie App</h1>
       <div class="movie-details"></div>
       <div class="note-container"></div>
       <div class="favorite-container"></div>
       <div class="form-container"></div>
       </div>
+      <input type="reset" value="Reset">
+    </form>
     <script type="module" src="/main.js"></script>
     <script type="module" src="/js/connection.js"></script>
     
