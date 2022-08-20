@@ -1,5 +1,5 @@
-import "./style.css";
-import {apiKey} from './key.js';
+import "../style.css";
+import apiKey from './key.js';
 
 document.querySelector("#app").innerHTML = `
   <h1>Movie Lookup Site</h1>
