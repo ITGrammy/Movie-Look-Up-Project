@@ -3,10 +3,15 @@ import apiKey from './key.js';
 import StateManager from './state-manager.js';
 import SearchForm from './search-form.js';
 import Movie from './movie.js';
+import MovieList from "./movie-list";
 
-
-const searchForm = new SearchForm();
+//Passing SM into the form so tht the form
+//Can let  SM know when search results rcv'd
+const stateManager = new StateManager();
+const searchForm = new SearchForm(stateManager);
 searchForm.drawForm();
+
+const movieList = new MovieList(stateManager);
 
   
   // document.querySelector("#app").innerHTML = `
