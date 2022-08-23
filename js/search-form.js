@@ -1,7 +1,6 @@
 //This file is in charge of building the form
 import apiKey from "./key.js";
 export default class SearchForm {
-
   constructor(stateManager) {
     this.stateManager = stateManager;
   }
@@ -10,6 +9,12 @@ export default class SearchForm {
     //the job of this method is to display the form
     const formTemplate = ` <form>
     <h1>Mo's Movie Search Site</h1> <br><br>
+
+    <label class="control-label" for="image"></label>
+    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1625&q=80" alt="movie theater pic" width="300" height="400">
+    
+    <br><br>
+
 <label class="control-label" for="title">Title:</label>
 
 <input
@@ -36,12 +41,24 @@ export default class SearchForm {
   maxlength="4"
   id="year"
 /><br />
-<button id="go" type="submit">go</button>
+<br><br>
+<button id="Go" type="submit" class="pinkify">Go</button>
+<button id="reset" class="pinkify">Reset</button>
+<button id="show-me-the-favorites" class="pinkify">Show Me The Favorites</button>
 </form>`;
 
     //go find form template and put it here
     document.querySelector(".formContainer").innerHTML = formTemplate;
-    document.querySelector("form").addEventListener("submit", this.search.bind(this));
+    document
+      .querySelector("form")
+      .addEventListener("submit", this.search.bind(this));
+    document
+      .querySelector("#reset")
+      .addEventListener("click", this.clearScreen.bind(this));
+      document
+      //When user clicks invoke the load favvo method
+      .querySelector("#show-me-the-favorites")
+      .addEventListener("click", this.loadFavorites.bind(this));
   }
 
   search(ev) {
@@ -59,13 +76,25 @@ export default class SearchForm {
     console.log(url);
     fetch(url)
       .then((response) => response.json())
-      .then(((data) => {
-        //Once form gets info it will notify SM a movie is found
-        console.log(data);
-        //processes data found
-        console.log(this);
-        this.stateManager.notify('movie-found', [data]);
-      }).bind(this));
+      .then(
+        ((data) => {
+          //Once form gets info it will notify SM a movie is found
+          console.log(data);
+          //processes data found
+          console.log(this);
+          this.stateManager.notify("movie-found", [data]);
+        }).bind(this)
+      );
   }
-  dispayResults() {}
+  clearScreen(ev) {
+    ev.preventDefault();
+    document.querySelector("#title").value = "";
+    document.querySelector("#year").value = "";
+    this.stateManager.notify("clear-everything");
+  }
+
+  loadFavorites(ev) {
+    ev.preventDefault();
+    this.stateManager.loadFavorites();
+  }
 }

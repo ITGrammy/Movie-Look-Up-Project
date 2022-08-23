@@ -1,9 +1,10 @@
 export default class Movie {
-    //Setting global variable for this instance of movie data
+  //Setting global variable for this instance of movie data
   constructor(stateManager, movieData) {
     this.stateManager = stateManager;
     this.movieData = movieData;
-
+    //By default we will not show notes
+    this.showNotes = true;
   }
 
   //Create var/String holding HTML
@@ -19,9 +20,9 @@ export default class Movie {
     //Target the right button by giving it a unique ID
     //Create an event listener
     const thumbsupButtonSelector = `#thumbsup_${this.movieData.imdbID}`;
-        document.querySelector(thumbsupButtonSelector).addEventListener('click', this.thumbsUp.bind(this));
-
-
+    document
+      .querySelector(thumbsupButtonSelector)
+      .addEventListener("click", this.thumbsUp.bind(this));
   }
 
   toHTML(data) {
@@ -31,20 +32,38 @@ export default class Movie {
         <p>${data.Year}</p>
         <img src="${data.Poster}" alt= "poster image"/>
         <p>${data.Plot}</p>
-
+       <div>
         <button class="thumbsup" id="thumbsup_${data.imdbID}">Thumbs Up</button>
+   
+        </div>
+        ${this.getNotesForm()} 
         `;
     return movieTemplate;
   }
+
+  getNotesForm() {
+    //Wrapped if statement bc we only want notes to show sometimes
+    if(this.stateManager.showNotes){
+    return `
+    <div>
+    <label>Notes</label> 
+    
+    <textarea>${this.movieData.notes ||""}</textarea>
+    </div>
+    `;
+  } else {
+    return '';
+  }
+  }
+
 
   //givedata and it will  giveu the html
 
   thumbsUp(ev) {
     //notifies statemanager that it would like to
     //save the movie to the db
-    console.log('Thumbs up: add  to idb!');
-    this.stateManager.notify('thumbsup-requested', this.movieData);
-
+    console.log("Thumbs up: add  to idb!");
+    this.stateManager.notify("thumbsup-requested", this.movieData);
   }
   saveComment() {
     //updates  the comment  after the user has added

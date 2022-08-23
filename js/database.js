@@ -28,7 +28,8 @@ export default class Database {
             this.connectDB(callback);
         }).bind(this);
     }
-
+//Encapsulates indb and goes  accesses datastore opens entire selection and  //
+//loops thru ea.of the  records and adds  to list called rows.
     getAll(callback){
         this.connectDB((function(db){
             var rows = [],
@@ -52,6 +53,7 @@ export default class Database {
                             if (a.timestamp > b.timestamp) return -1;
                             return 0;
                           });
+                          //When all the rows have been invoked does action
                         callback(rows);
                     }
                 };

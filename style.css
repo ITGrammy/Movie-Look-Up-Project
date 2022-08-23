@@ -6,3 +6,35 @@
   color: #502c49;
   margin-top: 60px;
 }
+
+.pinkify {
+  background-color: aquamarine;
+}
+
+body {
+  background-color: rgb(255, 0, 174);
+}
+
+form{
+  border: solid 10px black;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70vw;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: rgb(230, 173, 219);
+  }
+}
+
+textarea{
+  width: 300;
+  min-height: 120px;
+}
+
+#show_notes {
+  float:center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
