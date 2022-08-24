@@ -6,6 +6,7 @@ export default class Database {
         this.indexedDB		= window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
 	    this.baseName 	    = "momo-movie-database";
 	    this.storeName 	    = "movies";
+
     }
 
     connectDB (callback){
