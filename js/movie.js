@@ -19,10 +19,20 @@ export default class Movie {
 
     //Target the right button by giving it a unique ID
     //Create an event listener
-    const thumbsupButtonSelector = `#thumbsup_${this.movieData.imdbID}`;
+  
+    const thumbsupSelector = `#thumbsup_${this.movieData.imdbID}`;
     document
       .querySelector(thumbsupButtonSelector)
       .addEventListener("click", this.thumbsUp.bind(this));
+
+    if (this.stateManager.showNotes) {
+      // attach an event handler to the save button:
+      const saveButtonSelector = `#save_${this.movieData.imdbID}`;
+      console.log(saveButtonSelector);
+      document
+        .querySelector(saveButtonSelector)
+        .addEventListener("click", this.save.bind(this));
+    }
   }
 
   toHTML(data) {
@@ -43,19 +53,30 @@ export default class Movie {
 
   getNotesForm() {
     //Wrapped if statement bc we only want notes to show sometimes
-    if(this.stateManager.showNotes){
-    return `
+    if (this.stateManager.showNotes) {
+      // //attach an  event  handler to the thumbs  up button
+      // const saveButtonSelector = `#save_$(this.movieData.imdbID)`;
+      // console.log(saveButtonSelector);
+      // document
+      //   .querySelector(saveButtonSelector)
+      //   .addEventListener("click", this.save.bind(this));
+
+      return `
     <div>
     <label>Notes</label> 
     
-    <textarea>${this.movieData.notes ||""}</textarea>
+    <textarea id="comment_${this.movieData.imdbID}">${
+        this.movieData.notes || ""
+      }
+    </textarea> <button id="save_${this.movieData.imdbID}">Save</button>
+     
     </div>
     `;
-  } else {
-    return '';
-  }
-  }
 
+    } else {
+      return "";
+    }
+  }
 
   //givedata and it will  giveu the html
 
@@ -65,6 +86,17 @@ export default class Movie {
     console.log("Thumbs up: add  to idb!");
     this.stateManager.notify("thumbsup-requested", this.movieData);
   }
+
+  save (ev) {
+    // notifies the state manager that it would like to
+    // save the movie to the DB
+    console.log('Save: add comment to movie!');
+    const notes = document.querySelector(`#comment_${this.movieData.imdbID}`).value;
+    this.movieData.notes = notes;
+    console.log(this.movieData);
+    this.stateManager.notify('save-requested', this.movieData);
+}
+
   saveComment() {
     //updates  the comment  after the user has added
     //some notes

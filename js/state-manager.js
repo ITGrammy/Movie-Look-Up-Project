@@ -31,6 +31,7 @@ export default class StateManager {
     this.subscribe("movie-found", this.setSearchResults.bind(this));
     this.subscribe('favorites-loaded', this.setFavorites.bind(this));
     this.subscribe('show-notes', this.toggleNotes.bind(this));
+    this.subscribe('save-requested', this.saveMovieToFavorites.bind(this));
   }
  
   setSearchResults(movieDataList) {
@@ -60,6 +61,10 @@ export default class StateManager {
     const callbackFunction = function (movieDataList) {
       this.notify("favorites-loaded", movieDataList);
     };
+
+  
+
+
     //Invoke  the "getAll" method, with the cb function
     //as an argument. When getAll finishes loading the fav,
     //it will  fire cb  function w/fav
