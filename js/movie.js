@@ -22,7 +22,7 @@ export default class Movie {
   
     const thumbsupSelector = `#thumbsup_${this.movieData.imdbID}`;
     document
-      .querySelector(thumbsupButtonSelector)
+      .querySelector(thumbsupSelector)
       .addEventListener("click", this.thumbsUp.bind(this));
 
     if (this.stateManager.showNotes) {
